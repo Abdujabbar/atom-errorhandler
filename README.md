@@ -1,1 +1,1 @@
-# atom-errorHandler
+# atom-errorhandler
