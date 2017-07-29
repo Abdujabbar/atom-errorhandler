@@ -1,4 +1,23 @@
 {
+  "name": "atomwares/atom-errorhandler",
+  "type": "library",
+  "description": "Error Handler by Atom Framework",
+  "keywords": [
+    "atom",
+    "atomframework",
+    "php",
+    "error-handler",
+    "middleware",
+    "psr",
+    "psr-7",
+    "psr-15"
+  ],
+  "license": "MIT",
+  "authors": [{
+    "name": "Safarov Alisher",
+    "email": "alisher.safarov@outlook.com",
+    "homepage": "http://atomframework.net"
+  }],
   "require": {
     "php": ">=5.6.0",
     "http-interop/http-middleware": "^0.4.1",
