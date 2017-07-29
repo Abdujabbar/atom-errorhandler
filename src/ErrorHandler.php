@@ -2,19 +2,19 @@
 /**
  * @link http://www.atomframework.net/
  * @copyright Copyright (c) 2017 Safarov Alisher
- * @license https://github.com/atomwares/atom-errorHandler/blob/master/LICENSE (MIT License)
+ * @license https://github.com/atomwares/atom-errorhandler/blob/master/LICENSE (MIT License)
  */
 
 namespace Atom\Middleware;
 
 use Atom\Http\Middleware\CallableMiddleware;
-use Error;
-use Exception;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Error;
+use Exception;
 
 /**
  * Class ErrorHandler
