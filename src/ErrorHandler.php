@@ -7,9 +7,9 @@
 
 namespace Atom\Middleware;
 
-use Atom\Http\Middleware\CallableMiddleware;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Atom\Http\Server\CallableMiddleware;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -74,16 +74,16 @@ class ErrorHandler implements MiddlewareInterface
 
     /**
      * @param ServerRequestInterface $request
-     * @param DelegateInterface $delegate
+     * @param RequestHandlerInterface $handler
      *
      * @return ResponseInterface
      * @throws Error
      * @throws Exception
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         try {
-            $response = $delegate->process($request);
+            $response = $handler->handle($request);
         } catch (Exception $e) {
             if ($this->exceptionHandler === null) {
                 throw $e;
@@ -91,7 +91,7 @@ class ErrorHandler implements MiddlewareInterface
 
             $response = $this->exceptionHandler->process(
                 $request->withAttribute('error', $this->error = $e),
-                $delegate
+                $handler
             );
         } catch (Error $e) {
             if ($this->errorHandler === null) {
@@ -100,7 +100,7 @@ class ErrorHandler implements MiddlewareInterface
 
             $response = $this->errorHandler->process(
                 $request->withAttribute('error', $this->error = $e),
-                $delegate
+                $handler
             );
         }
 
